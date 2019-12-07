@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     stroke: "red",
   },
   circleInEnd: {
-    stroke: "green",
+    stroke: "#348e00",
   },
   circleOut: {
     // fill: 'url(#gradientOut)',
@@ -30,9 +30,9 @@ const useStyles = makeStyles({
     fill: 'url(#gradientOutCompleted)',
   },
   '@keyframes setCircleOutBg': {
-      '100%': {
-        fill: 'url(#gradientOutActive)'
-      }
+    '100%': {
+      fill: 'url(#gradientOutActive)'
+    }
   },
   '@keyframes setBorderCircle': {
     '100%': {
@@ -42,9 +42,15 @@ const useStyles = makeStyles({
   circleInBorder: {
     fill: "none",
     stroke: "black",
-    animation: '$setBorderCircle 2s linear infinite forwards',
     strokeWidth: 2
   },
+  circleInBorderActive: {
+    animation: '$setBorderCircle 2s linear infinite forwards',
+  },
+  circleInBorderCompleted: {
+    stroke: darken('#348e00', 1),
+  },
+
   line: {
     fill: "pink",
     stroke: "pink",
@@ -56,7 +62,7 @@ const useStyles = makeStyles({
     stopOpacity: 1
   },
   stop2: {
-    stopColor: "green",
+    stopColor: "#348e00",
     stopOpacity: 1
   },
   count: {
@@ -85,8 +91,8 @@ const App = () => {
         </radialGradient>
         <radialGradient id="gradientOutCompleted" cx="50%" cy="50%" r="55%">
           <stop stopColor="transparent" offset="0%" />
-          <stop stopColor="green" offset="40%" />
-          <stop stopColor="#000" offset="90%" />
+          <stop stopColor="#348e00" offset="40%" />
+          <stop stopColor={`${darken('#348e00', 0.8)}`} offset="90%" />
           <stop stopColor="#000" offset="100%" />
         </radialGradient>
         <radialGradient id="gradientOutActive" cx="50%" cy="50%" r="55%">
@@ -108,7 +114,6 @@ const App = () => {
           cx={150}
           cy={150}
           r={130}
-          // id="orange-circle"
           className={clsx(
             classes.circleOut,
             countUp < 100 ? classes.circleOutActive: classes.circleOutCompleted
@@ -121,13 +126,21 @@ const App = () => {
           //   yoyo: Infinity,
           // }}
         />
-
-        <circle cx={150} cy={150} r={106} className={classes.circleInBorder} />
+        <circle
+            cx={150} 
+            cy={150}
+            r={106}
+            className={clsx(
+              classes.circleInBorder, 
+              countUp < 100? classes.circleInBorderActive: classes.circleInBorderCompleted
+            )} 
+        />
         <motion.circle cx={150} cy={150} r={100}
           className={clsx(
             classes.circleIn, 
             countUp < 100 ? classes.circleInStart: classes.circleInEnd
-          )} />
+          )}
+        />
         <text 
           x={150} y={150}
           className={classes.count}
@@ -136,7 +149,12 @@ const App = () => {
           alignmentBaseline="middle">
             {countUp}%
         </text>
-        <circle cx={150} cy={150} r={95} className={classes.circleInBorder} />
+        <circle cx={150} cy={150} r={95}
+            className={clsx(
+              classes.circleInBorder, 
+              countUp < 100? classes.circleInBorderActive: ''
+            )} 
+        />
       </g>
     </svg>
   );

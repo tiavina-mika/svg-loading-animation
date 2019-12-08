@@ -75,6 +75,10 @@ const useStyles = makeStyles({
     buttonActive: {
       fill: '#fff'
     },
+    img: {
+      position:"absolute",
+      transformOrigin: 'center'
+    },
     '@keyframes setCircleOutBg': {
       '100%': {
         fill: 'url(#gradientOutActiveAnimate)'
@@ -217,7 +221,8 @@ const App = () => {
                     width="70"
                     y="115"
                     x="115"
-                    style={{position:"absolute",transformOrigin: 'center'}}
+                    className={classes.img}
+                    onClick={pauseResume}
                   >
                     {!paused ? <animateTransform 
                       attributeName="transform" 

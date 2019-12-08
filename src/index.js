@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles, darken } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import { motion } from "framer-motion";
 import { useCountUp } from 'react-countup';
 import Buttons from './buttons';
 
@@ -19,7 +18,6 @@ const useStyles = makeStyles({
       stroke: "#4dd300",
     },
     circleOut: {
-      // fill: 'url(#gradientOut)',
       stroke: '#000',
       strokeMiterlimit: '10',
       strokeWidth: '2px',
@@ -39,7 +37,6 @@ const useStyles = makeStyles({
       position: 'absolute',
     },
     circleOutAnimatedOffset: {
-      // fill: lighten('#7f7f7f', 0.5),
       fill: 'none',
     },
     circleInBorder: {
@@ -199,7 +196,7 @@ const App = () => {
                 countUp < 100? classes.circleInBorderActive: classes.circleInBorderCompleted
               )} 
           />
-          <motion.circle cx={150} cy={150} r={100}
+          <circle cx={150} cy={150} r={100}
             className={clsx(
               classes.circleIn, 
               countUp < 100 ? classes.circleInStart: classes.circleInEnd
